@@ -9,6 +9,7 @@ function callback(resp) {
   resp.json().then(getData);
 }
 
+
 function fetchTodos() {
   mainarea.innerHTML = "";
   fetch("http://localhost:3000/todos", {
@@ -32,23 +33,6 @@ function displayTodos(todos) {
   });
 }
 
-//post request
-
-function appearMe() {
-  const titleinput = document.getElementById("title");
-  const title = document.getElementById("title").value;
-  fetch("http://localhost:3000/todos", {
-    method: "post",
-    body: JSON.stringify({ title: title, description: " " }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(fetchTodos)
-    .then(() => {
-      titleinput.value = "";
-    });
-}
 
 //Delete request
 
@@ -62,4 +46,23 @@ function deleteTodo(id) {
       console.error("error");
     }
   });
+}
+
+
+//post request
+
+function appearMe() {
+  const titleinput = document.getElementById("title");
+  const title = titleinput.value;
+  fetch("http://localhost:3000/todos", {
+    method: "post",
+    body: JSON.stringify({ title: title, description: " " }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(fetchTodos)
+    .then(() => {
+      titleinput.value = "";
+    });
 }
